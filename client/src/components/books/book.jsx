@@ -7,9 +7,11 @@ class BookView extends Component {
   this.props.dispatch(getBookWithReviewer);
  }
  render() {
+  console.log("test");
   return <div>book view</div>;
  }
 }
+
 
 function mapStateToProps(state) {
  return {
