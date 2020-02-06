@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 
 class BookView extends Component {
  componentDidMount() {
-  this.props.dispatch(getBookWithReviewer);
+  this.props.dispatch(getBookWithReviewer(this.props.match.params.id));
  }
  render() {
-  console.log("test");
-  return <div>book view</div>;
+  console.log(this.props);
+
+  return <div>book viewwww</div>;
  }
 }
-
 
 function mapStateToProps(state) {
  return {

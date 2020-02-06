@@ -1,9 +1,7 @@
-const INITIAL_STATE = {
-	users: null
-};
+const INITIAL_STATE = {};
 
-export default function(state={},action){
- switch(action.type){
+export default function(state = INITIAL_STATE, action) {
+ switch (action.type) {
   default:
    return state;
  }

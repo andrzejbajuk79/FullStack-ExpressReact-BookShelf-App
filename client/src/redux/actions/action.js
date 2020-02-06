@@ -1,12 +1,9 @@
 import axios from "axios";
-import { GET_BOOKS } from "./../constants/contants";
+import { GET_BOOKS, GET_BOOK_W_REVIEWER } from "./../constants/contants";
 
 export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
  const request = axios
-  .get(
-   `
- /api/books?limit=${limit}&skip=${start}&order=${order}`
-  )
+  .get(`/api/books?limit=${limit}&skip=${start}&order=${order}`)
   .then(res => {
    if (list) {
     return [...list, ...res.data];
@@ -20,4 +17,33 @@ export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
  };
 }
 
-export function getBookWithReviewer() {}
+export function getBookWithReviewer(id) {
+ //majac id ksiazki musimy zrobic dwa requesty, jeden z BOOK collections
+ //i to bedzie kska a drugi z USER na podstawie ownerID tej ksiazki
+ //uzywamy redux THUNK
+ const request = axios.get(`/api/getBook?id=${id}`);
+ //z request dostajemy promise i dostajemy response.data
+ return dispatch => {
+  request.then(({ data }) => {
+   let book = data; //ksiazka z BOOK collections
+
+   //Thunk monza opoznic wykonanie requestu, i na koncu dopier zrobic
+   //dispatch
+
+   axios
+    .get(`/api/getReviewer?id=${book.ownerId}`)
+
+    .then(({ data }) => {
+     let response = {
+      book, //pochodzi z piewrszego requeste
+      reviewer: data //pochodzi z drugiego request
+     };
+     //i robimy dispatch tych dwoch
+     dispatch({
+      type: GET_BOOK_W_REVIEWER,
+      payload: response
+     });
+    });
+  });
+ };
+}
