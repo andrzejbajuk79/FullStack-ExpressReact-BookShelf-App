@@ -3,6 +3,9 @@ import { getBookWithReviewer } from "../../redux/actions/action";
 import { connect } from "react-redux";
 
 class BookView extends Component {
+ componentDidMount() {
+  this.props.dispatch(getBookWithReviewer);
+ }
  render() {
   return <div>book view</div>;
  }
