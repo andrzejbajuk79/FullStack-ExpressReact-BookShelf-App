@@ -1,7 +1,9 @@
 import {
  GET_BOOKS,
  GET_BOOK_W_REVIEWER,
- CLEAR_BOOK_W_REVIEWER
+ CLEAR_BOOK_W_REVIEWER,
+ CLEAR_NEWBOOK,
+ ADD_BOOK
 } from "./../constants/contants";
 
 const INITIAL_STATE = {};
@@ -21,7 +23,16 @@ export default function(state = INITIAL_STATE, action) {
     book: action.payload.book,
     reviewer: action.payload.reviewer
    };
-
+  case ADD_BOOK:
+   return {
+    ...state,
+    newBook: action.payload
+   };
+  case CLEAR_NEWBOOK:
+   return {
+    ...state,
+    newBook: action.payload
+   };
   default:
    return state;
  }

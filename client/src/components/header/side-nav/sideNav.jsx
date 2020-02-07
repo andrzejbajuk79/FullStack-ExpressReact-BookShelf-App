@@ -1,19 +1,20 @@
-import React from 'react';
-import SideNav from 'react-simple-sidenav';
+import React from "react";
+import SideNav from "react-simple-sidenav";
+import SidenavItems from "./sidenav_items";
 
-const Nav = (props) => {
+const Nav = props => {
  return (
   <SideNav
-  onHideNav={props.onHideNav}
-  showNav={props.showNav}
-  navStyle={{
-   background:'#242424',
-   maxWidth:'220px'
-  }}
+   onHideNav={props.onHideNav}
+   showNav={props.showNav}
+   navStyle={{
+    background: "#242424",
+    maxWidth: "220px"
+   }}
   >
-   items
+   <SidenavItems />
   </SideNav>
- )
-}
+ );
+};
 
 export default Nav;

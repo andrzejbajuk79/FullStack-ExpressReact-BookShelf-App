@@ -3,8 +3,13 @@ import {
  GET_BOOKS,
  USER_LOGIN,
  GET_BOOK_W_REVIEWER,
- CLEAR_BOOK_W_REVIEWER
+ CLEAR_BOOK_W_REVIEWER,
+ USER_AUTH,
+ CLEAR_NEWBOOK,
+ ADD_BOOK
 } from "./../constants/contants";
+
+/*==================BOOK ============================*/
 
 export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
  const request = axios
@@ -63,6 +68,23 @@ export function clearBookWithReviewer() {
   }
  };
 }
+
+// addBook, clearNewBook
+
+export function addBook(book) {
+ const request = axios.post("/api/book", book).then(response => response.data);
+ return {
+  type: ADD_BOOK,
+  payload: request
+ };
+}
+
+export function clearNewBook() {
+ return {
+  type: CLEAR_NEWBOOK,
+  payload: ""
+ };
+}
 /*================== USER============================*/
 
 export function loginUser({ email, password }) {
@@ -71,6 +93,15 @@ export function loginUser({ email, password }) {
   .then(response => response.data);
  return {
   type: USER_LOGIN,
+  payload: request
+ };
+}
+
+export function auth() {
+ const request = axios.get("/api/auth").then(response => response.data);
+
+ return {
+  type: USER_AUTH,
   payload: request
  };
 }
