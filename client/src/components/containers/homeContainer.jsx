@@ -7,6 +7,7 @@ class HomeContainer extends Component {
  componentDidMount() {
   this.props.dispatch(getBooks(1, 0, "desc"));
  }
+
  renderItems = books =>
   books.list
    ? books.list.map(item => <BookItem {...item} key={item._id} />)

@@ -1,5 +1,9 @@
 import axios from "axios";
-import { GET_BOOKS, GET_BOOK_W_REVIEWER } from "./../constants/contants";
+import {
+ GET_BOOKS,
+ GET_BOOK_W_REVIEWER,
+ CLEAR_BOOK_W_REVIEWER
+} from "./../constants/contants";
 
 export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
  const request = axios
@@ -45,5 +49,16 @@ export function getBookWithReviewer(id) {
      });
     });
   });
+ };
+}
+
+//czyscimy przy unmouncie state
+export function clearBookWithReviewer() {
+ return {
+  type: CLEAR_BOOK_W_REVIEWER,
+  payload: {
+   book: {},
+   reviewer: {}
+  }
  };
 }
